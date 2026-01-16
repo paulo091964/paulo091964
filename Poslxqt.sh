@@ -5,7 +5,7 @@ USUARIO="paulo"
 HOME_USUARIO="/home/$USUARIO"
 
 echo "=============================="
-echo " Pós-inst Debian 13 Lxqt-core   "
+echo "Pós-inst Debian 13 Lxqt-core"
 echo "=============================="
 
 # ----------------------------------
