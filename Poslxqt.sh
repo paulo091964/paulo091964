@@ -4,13 +4,13 @@ set -e
 USUARIO="paulo"
 HOME_USUARIO="/home/$USUARIO"
 
-echo "================================="
+echo "=============================="
 echo " Pós-inst Debian 13 Lxqt-core   "
-echo "================================="
+echo "=============================="
 
-# --------------------------------------
+# ----------------------------------
 # VERIFICAÇÕES BÁSICAS
-# --------------------------------------
+# -----------------------------------
 
 if [ "$EUID" -ne 0 ]; then
   echo "Execute como root."
@@ -22,16 +22,16 @@ if ! id "$USUARIO" >/dev/null 2>&1; then
   exit 1
 fi
 
-# -------------------------------------
+# ---------------------------------
 # UPDATE & BASE
-# -------------------------------------
+# ---------------------------------
 
 echo "==> Atualizando sistema"
 apt update && apt upgrade -y
 
-# --------------------------------------
+# ----------------------------------
 # BASE GRÁFICA LXQT
-# --------------------------------------
+# ----------------------------------
 
 echo "==> Instalando Xorg + LXQt mínimo"
 
@@ -39,9 +39,9 @@ apt install -y xserver-xorg-core xinit \ lxqt-core lxqt-panel lxqt-session \ lxq
 
 apt-get install lightdm \ --no-install-recomends -y
 
-# -------------------------------------
+# -----------------------------------
 # INTERNET, WI-FI E FIRMWARE
-#---------------------------------------
+#------------------------------------
 
 echo "==> Instalando rede e firmwares"
 
@@ -50,9 +50,9 @@ apt install -y network-manager network-manager-gnome wpasupplicant
 
 systemctl enable-now NetworkManager
 
-# ------------------------------------
+# -----------------------------------
 # PROGRAMAS ESSENCIAIS
-#-------------------------------------
+#------------------------------------
 
 echo "==> Instalando programas essenciais"
 
@@ -65,22 +65,22 @@ mkdir -p ~/.gkrellm2/themes/
 wget -c --progress=bar  http://www.muhri.net/gkrellm/CoplandOS.gkrellm.tar.gz
 tar -xvf CoplandOS.tar.gz -C ~/.gkrellm2/themes/
 
-# ------------------------------------
+# ----------------------------------
 # REMOÇÃO DE PROGRAMAS INÚTEIS
-# -------------------------------------
+# ----------------------------------
 
 
-# -------------------------------------
+# ----------------------------------
 # TERMINAIS E AUTOCOMPLETE
-# -------------------------------------
+# ---------------------------------
 
 echo "==> Instalando terminais e bash completion"
 
 apt install -y lxterminal qterminal bash-completion fonts-ubuntu || true
 
-# -------------------------------------
+# ----------------------------------
 # QTERMINAL - CONFIGURAÇÃO
-# ------------------------------------
+# ---------------------------------
 
 echo "==> Configurando lxterminal"
 
@@ -99,7 +99,7 @@ chown -R "$USUARIO:$USUARIO" "$HOME_USUARIO/.config"
 
 update-alternatives --set x-terminal-emulator /usr/bin/qterminal
 
-# ------------------------------------
+# -----------------------------------
 # XTERM (FALLBACK)
 # -----------------------------------
 
@@ -139,9 +139,9 @@ fi
 EOF
 fi
 
-# --------------------------------------
+# ----------------------------------
 # LOGIN AUTOMÁTICO
-# -------------------------------------
+# ---------------------------------
 
 echo "==> Configurando login automático"
 
@@ -154,15 +154,15 @@ autologin-user-timeout=0
 user-session=lxqt
 EOF
 
-# -------------------------------------
+# --------------------------------
 # GRUPOS DO USUÁRIO
-# -------------------------------------
+# --------------------------------
 
 usermod -aG audio,video,netdev,plugdev "$USUARIO"
 
-# ------------------------------------
+# --------------------------------
 # SWAP EM ARQUIVO
-# ------------------------------------
+# --------------------------------
 
 echo "==> Configurando swapfile"
 
@@ -177,7 +177,7 @@ if ! grep -q "/swapfile" /etc/fstab; then
   echo "/swapfile none swap sw 0 0" >> /etc/fstab
 fi
 
-# ------------------------------------
+# -----------------------------------
 # OTIMIZAÇÕES
 # -----------------------------------
 
@@ -196,24 +196,24 @@ EOF
 
 systemctl restart systemd-journald
 
-# -----------------------------------
+# ----------------------------------
 # DISPLAY MANAGER
-# ------------------------------------
+# ----------------------------------
 
 systemctl enable lightdm
 
-# -----------------------------------
+# ---------------------------------
 # LIMPEZA FINAL
-# -----------------------------------
+# --------------------------------
 
 echo "==> Limpeza final"
 
 apt autoremove -y
 apt clean
 
-echo "================================="
+echo "============================"
 echo " Sistema pronto."
 echo " Reiniciando..."
-echo "================================="
+echo "============================"
 
 reboot
