@@ -35,7 +35,11 @@ apt update && apt upgrade -y
 
 echo "==> Instalando Xorg + LXQt mínimo"
 
-apt install -y xserver-xorg-core xinit \ lxqt-core lxqt-panel lxqt-session \ lxqt-config openbox dbus-x11 gvfs \ gvfs-backends gvfs-fuse \ x11-xserver-utils || true
+apt install -y xserver-xorg-core \
+xinit lxqt-core lxqt-panel \
+lxqt-session lxqt-config openbox \
+dbus-x11 gvfs gvfs-backends \
+gvfs-fuse x11-xserver-utils || true
 
 apt-get install lightdm \ --no-install-recomends -y
 
