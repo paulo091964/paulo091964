@@ -36,10 +36,17 @@ apt update && apt upgrade -y
 echo "Instalando Xorg + LXQt mínimo"
 
 apt install -y xserver-xorg-core \
-xinit lxqt-core lxqt-panel \
-lxqt-session lxqt-config openbox \
-dbus-x11 gvfs gvfs-backends \
-gvfs-fuse x11-xserver-utils || true
+xinit \
+lxqt-core \
+lxqt-panel \
+lxqt-session \
+lxqt-config \
+openbox \
+dbus-x11 \
+gvfs \
+gvfs-backends \
+gvfs-fuse \
+x11-xserver-utils || true
 
 apt-get install lightdm \ --no-install-recomends -y
 
@@ -49,7 +56,8 @@ apt-get install lightdm \ --no-install-recomends -y
 
 echo "Instalando rede e firmwares"
 
-apt install -y network-manager \ network-manager-gnome wpasupplicant \
+apt install -y network-manager \ network-manager-gnome \
+wpasupplicant \
 firmware-linux \
 firmware-misc-nonfree || true
 
@@ -61,8 +69,19 @@ systemctl enable-now NetworkManager
 
 echo "Instalando programas essenciais"
 
-apt install -y mupdf htop abiword \ audacious xarchiver rclone \
-falkon claws-mail claws-mail-plugins \ pavucontrol gkrellm fonts-ubuntu || true
+apt install -y \
+mupdf \
+htop \
+abiword \ 
+audacious \
+xarchiver \
+rclone \
+falkon \
+claws-mail \
+claws-mail-plugins \ 
+pavucontrol \
+gkrellm \
+fonts-ubuntu || true
   
 echo"Criar diretório conf gkrellm ,baixar themas copliland e descompactar na pasta ~/.gkrellm2/themes/"
 
@@ -149,7 +168,7 @@ fi
 # LOGIN AUTOMÁTICO
 # ---------------------------------
 
-echo "==> Configurando login automático"
+echo "Configurando login automático"
 
 mkdir -p /etc/lightdm/lightdm.conf.d
 
